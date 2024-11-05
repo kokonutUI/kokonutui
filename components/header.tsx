@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/lib/theme-toggle";
 import { Shuffle, Github, Layers2, ArrowUp } from "lucide-react";
@@ -5,18 +7,11 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-interface HeaderProps {
-    isMenuOpen: boolean;
-    setIsMenuOpen: (value: boolean) => void;
-    shuffleComponents: () => void;
-}
 
-export function Header({
-    isMenuOpen,
-    setIsMenuOpen,
-    shuffleComponents,
-}: HeaderProps) {
+export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -128,39 +123,6 @@ export function Header({
                                     <ArrowUp className="w-4 h-4" />
                                 </motion.button>
                             </div>
-
-                            <motion.button
-                                onClick={shuffleComponents}
-                                className={`
-                                    relative z-10
-                                    flex items-center justify-center
-                                    rounded-full
-                                    cursor-pointer
-                                    bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-800
-                                    hover:from-zinc-900 hover:via-zinc-800 hover:to-zinc-900
-                                    dark:from-gray-50 dark:via-white dark:to-gray-50
-                                    dark:hover:from-white dark:hover:via-gray-50 dark:hover:to-white
-                                    text-white dark:text-zinc-900
-                                    w-7 h-7
-                                    transition-all duration-300
-                                    shadow-[0_2px_8px_-2px_rgba(0,0,0,0.12),inset_0_1px_0.5px_0.5px_rgba(255,255,255,0.15)]
-                                    dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.08),inset_0_1px_0.5px_0.5px_rgba(255,255,255,0.6)]
-                                    hover:shadow-[0_2px_12px_-2px_rgba(0,0,0,0.2),inset_0_1px_0.5px_0.5px_rgba(255,255,255,0.15)]
-                                    group
-                                `}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                            >
-                                <motion.div
-                                    whileTap={{ rotate: 180 }}
-                                    transition={{
-                                        duration: 0.3,
-                                        ease: "easeInOut",
-                                    }}
-                                >
-                                    <Shuffle className="w-4 h-4" />
-                                </motion.div>
-                            </motion.button>
 
                             <motion.div
                                 whileHover={{ scale: 1.01 }}

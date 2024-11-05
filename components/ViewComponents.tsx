@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { ComponentItem } from "./ComponentItem";
+import { cn } from "@/lib/utils";
 
 interface Component {
     id: number;
@@ -11,14 +12,26 @@ interface Component {
 
 interface ViewComponentsProps {
     components: Component[];
+    folder: string;
+    className?: string;
+    containerClassName?: string;
 }
 
-export function ViewComponents({ components }: ViewComponentsProps) {
+export function ViewComponents({
+    components,
+    folder,
+    containerClassName,
+}: ViewComponentsProps) {
     return (
         <Suspense fallback={null}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 w-full">
+            <div
+                className={cn(
+                    "grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 w-full",
+                    containerClassName
+                )}
+            >
                 {components.map((item) => (
-                    <ComponentItem key={item.id} item={item} />
+                    <ComponentItem key={item.id} item={item} folder={folder} />
                 ))}
             </div>
         </Suspense>

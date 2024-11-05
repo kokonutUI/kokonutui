@@ -11,9 +11,10 @@ interface ComponentItemProps {
         fileName: string;
         dependencies?: string[];
     };
+    folder: string;
 }
 
-export function ComponentItem({ item }: ComponentItemProps) {
+export function ComponentItem({ item, folder }: ComponentItemProps) {
     const [isLoading, startTransition] = useTransition();
     const [rawText, setRawText] = useState("");
     useEffect(() => {
@@ -22,7 +23,7 @@ export function ComponentItem({ item }: ComponentItemProps) {
                 /**
                  * Call server action
                  */
-                const component = await getComponent(item.fileName);
+                const component = await getComponent(item.fileName, folder);
                 setRawText(component);
                 /**
                  * Simulate for animation.
@@ -32,7 +33,7 @@ export function ComponentItem({ item }: ComponentItemProps) {
         } catch (err) {
             console.error("Failed to copy:", err);
         }
-    }, [item]);
+    }, [item, folder]);
 
     return (
         <div

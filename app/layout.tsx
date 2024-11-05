@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { Header } from "@/components/header";
+import { cn } from "@/lib/utils";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -50,9 +52,15 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={cn(
+                    geistSans.variable,
+                    geistMono.variable,
+                    geistSans.className,
+                    "antialiased"
+                )}
             >
                 <ThemeProvider attribute="class" disableTransitionOnChange>
+                    <Header />
                     {children}
                 </ThemeProvider>
                 <Analytics />
