@@ -26,12 +26,16 @@ export function ViewComponents({
         <Suspense fallback={null}>
             <div
                 className={cn(
-                    "grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 w-full",
+                    "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-12 w-full",
                     containerClassName
                 )}
             >
                 {components.map((item) => (
-                    <ComponentItem key={item.id} item={item} folder={folder} />
+                    <ComponentItem
+                        key={item.id}
+                        item={item}
+                        folder={folder}
+                    />
                 ))}
             </div>
         </Suspense>

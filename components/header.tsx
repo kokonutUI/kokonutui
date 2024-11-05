@@ -152,7 +152,7 @@ export function Header() {
                                 >
                                     <Github className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" />
                                     <span className="text-sm font-medium">
-                                        View on Github
+                                        Star on Github
                                     </span>
                                 </Link>
                             </motion.div>

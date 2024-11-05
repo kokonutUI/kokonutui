@@ -38,7 +38,7 @@ export function ComponentItem({ item, folder }: ComponentItemProps) {
     return (
         <div
             id={`component-${item.id}`}
-            className="group relative w-full p-4 sm:p-6 lg:p-8 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 
+            className="group relative w-full p-4 my-2 sm:p-6 lg:p-8 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 
             backdrop-blur-sm shadow-xs transition-all duration-500
             hover:border-zinc-300 dark:hover:border-zinc-700"
         >
@@ -83,7 +83,7 @@ export function ComponentItem({ item, folder }: ComponentItemProps) {
                     dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 opacity-50"
                 />
             </div>
-            <div className="relative">{item.component}</div>
+            <div className="relative my-12">{item.component}</div>
         </div>
     );
 }
