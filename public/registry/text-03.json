@@ -1,0 +1,17 @@
+{
+  "name": "text-03",
+  "type": "registry:component",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "text"
+  ],
+  "files": [
+    {
+      "content": "\"use client\";\n\nimport { cn } from \"@/lib/utils\";\nimport { motion } from \"framer-motion\";\n\ninterface AnimatedTextProps {\n    text?: string;\n    className?: string;\n}\n\nexport default function Text_03({\n    text = \"Hover me\",\n    className = \"\",\n}: AnimatedTextProps) {\n    return (\n        <motion.span\n            className={cn(\n                \"w-full text-center inline-block cursor-pointer text-3xl transition-all\",\n                className\n            )}\n            whileHover=\"hover\"\n            initial=\"initial\"\n        >\n            {text.split(\"\").map((char, index) => (\n                <motion.span\n                    key={index}\n                    className=\"inline-block\"\n                    variants={{\n                        initial: {\n                            y: 0,\n                            scale: 1,\n                        },\n                        hover: {\n                            y: -4,\n                            scale: 1.2,\n                            transition: {\n                                type: \"spring\",\n                                stiffness: 300,\n                                damping: 15,\n                                delay: index * 0.03,\n                            },\n                        },\n                    }}\n                >\n                    {char}\n                </motion.span>\n            ))}\n        </motion.span>\n    );\n}\n",
+      "path": "components/text-03.tsx",
+      "target": "components/components/text-03.tsx"
+    }
+  ]
+}

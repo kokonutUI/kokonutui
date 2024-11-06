@@ -1,0 +1,17 @@
+{
+  "name": "button-01",
+  "type": "registry:component",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "content": "\"use client\";\n\nimport { Button } from \"@/components/ui/button\";\nimport { cn } from \"@/lib/utils\";\nimport { motion, useAnimation } from \"framer-motion\";\nimport { Trash2Icon } from \"lucide-react\";\nimport { useState } from \"react\";\n\ninterface Btn_01Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n    onHoldComplete?: () => void;\n    holdDuration?: number;\n}\n\nexport default function Btn_01({\n    className,\n    onHoldComplete,\n    holdDuration = 3000,\n    ...props\n}: Btn_01Props) {\n    const [isHolding, setIsHolding] = useState(false);\n    const controls = useAnimation();\n\n    async function handleMouseDown() {\n        setIsHolding(true);\n        controls.set({ width: \"0%\" });\n        await controls.start({\n            width: \"100%\",\n            transition: {\n                duration: holdDuration / 1000,\n                ease: \"linear\",\n            },\n        });\n        onHoldComplete?.();\n    }\n\n    function handleMouseUp() {\n        setIsHolding(false);\n        controls.stop();\n        controls.start({\n            width: \"0%\",\n            transition: { duration: 0.1 },\n        });\n    }\n\n    return (\n        <Button\n            className={cn(\n                \"min-w-40 relative overflow-hidden\",\n                \"bg-red-100 dark:bg-red-200\",\n                \"hover:bg-red-100 dark:hover:bg-red-200\",\n                \"text-red-500 dark:text-red-600\",\n                \"border border-red-200 dark:border-red-300\",\n                className\n            )}\n            onMouseDown={handleMouseDown}\n            onMouseUp={handleMouseUp}\n            onMouseLeave={handleMouseUp}\n            {...props}\n        >\n            <motion.div\n                initial={{ width: \"0%\" }}\n                animate={controls}\n                className={cn(\n                    \"absolute left-0 top-0 h-full\",\n                    \"bg-red-200/30\",\n                    \"dark:bg-red-300/30\"\n                )}\n            />\n            <span className=\"relative z-10 w-full flex items-center justify-center gap-2\">\n                <Trash2Icon className=\"w-4 h-4\" />\n                {!isHolding ? \"Hold me\" : \"Release\"}\n            </span>\n        </Button>\n    );\n}\n",
+      "path": "components/btn-01.tsx",
+      "target": "components/components/btn-01.tsx"
+    }
+  ]
+}

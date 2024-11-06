@@ -1,0 +1,17 @@
+{
+  "name": "text-06",
+  "type": "registry:component",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "text"
+  ],
+  "files": [
+    {
+      "content": "\"use client\";\n\nimport { cn } from \"@/lib/utils\";\nimport { motion } from \"framer-motion\";\n\ninterface SwooshTextProps {\n    text?: string;\n    className?: string;\n}\n\nexport function Text_06({ text = \"HONGDAE\", className = \"\" }: SwooshTextProps) {\n    return (\n        <div className=\"relative w-full text-center\">\n            {/* SVG Filter Definition */}\n            <svg className=\"absolute w-0 h-0\">\n                <defs>\n                    <filter id=\"motion-blur\" filterUnits=\"userSpaceOnUse\">\n                        <feGaussianBlur stdDeviation=\"2 0\" />\n                        <feOffset dx=\"-6\" />\n                        <feBlend in=\"SourceGraphic\" mode=\"normal\" />\n                    </filter>\n                </defs>\n            </svg>\n\n            <motion.div\n                className={cn(\n                    \"relative text-3xl font-bold text-black dark:text-white\",\n                    className\n                )}\n            >\n                {/* Background line shadows */}\n                <div className=\"absolute inset-0 opacity-5 flex flex-col justify-center gap-4\">\n                    {/* Top line */}\n                    <span\n                        className=\"absolute right-[55%] top-[15%] h-2\"\n                        style={{\n                            width: \"30%\",\n                            filter: \"url(#motion-blur)\",\n                            transform: \"translateX(-6px)\",\n                            background:\n                                \"linear-gradient(to left, currentColor, transparent)\",\n                        }}\n                    />\n                    {/* Middle line */}\n                    <span\n                        className=\"absolute right-[55%] top-[40%] h-2\"\n                        style={{\n                            width: \"27%\",\n                            filter: \"url(#motion-blur)\",\n                            transform: \"translateX(-6px)\",\n                            background:\n                                \"linear-gradient(to left, currentColor, transparent)\",\n                        }}\n                    />\n                    {/* Bottom line */}\n                    <span\n                        className=\"absolute right-[55%] top-[65%] h-2\"\n                        style={{\n                            width: \"25%\",\n                            filter: \"url(#motion-blur)\",\n                            transform: \"translateX(-6px)\",\n                            background:\n                                \"linear-gradient(to left, currentColor, transparent)\",\n                        }}\n                    />\n                </div>\n\n                {/* Main text */}\n                <span className=\"relative italic text-emerald-400\">{text}</span>\n            </motion.div>\n        </div>\n    );\n}\n",
+      "path": "components/text-06.tsx",
+      "target": "components/components/text-06.tsx"
+    }
+  ]
+}

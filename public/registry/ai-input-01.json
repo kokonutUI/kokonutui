@@ -1,6 +1,6 @@
 {
   "name": "ai-input-01",
-  "type": "registry:ui",
+  "type": "registry:component",
   "dependencies": [
     "lucide-react"
   ],
@@ -9,10 +9,9 @@
   ],
   "files": [
     {
-      "type": "registry:ui",
       "content": "\"use client\";\n\nimport { CornerRightUp, Mic } from \"lucide-react\";\nimport { useState, useRef } from \"react\";\nimport { Textarea } from \"@/components/ui/textarea\";\nimport { cn } from \"@/lib/utils\";\n\nexport default function AIInput_01() {\n    const [inputValue, setInputValue] = useState(\"\");\n    const textareaRef = useRef<HTMLTextAreaElement | null>(null);\n\n    return (\n        <div className=\"w-full py-4\">\n            <div className=\"relative max-w-xl w-full mx-auto\">\n                <Textarea\n                    id=\"input-01\"\n                    placeholder=\"Type your message...\"\n                    className=\"max-w-xl bg-black/5 dark:bg-white/5 w-full rounded-3xl pl-6 pr-16 placeholder:text-black/50 dark:placeholder:text-white/50 border-none ring-black/20 dark:ring-white/20 text-black dark:text-white text-wrap py-4 max-h-[200px] overflow-y-auto resize-none min-h-[40px] focus-visible:ring-0 focus-visible:ring-offset-0\"\n                    rows={1}\n                    ref={textareaRef}\n                    value={inputValue}\n                    onChange={(e) => {\n                        setInputValue(e.target.value);\n                        if (textareaRef.current) {\n                            textareaRef.current.style.height = \"auto\";\n                            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;\n                        }\n                    }}\n                />\n\n                <div\n                    className={cn(\n                        \"absolute top-1/2 -translate-y-1/2 rounded-xl bg-black/5 dark:bg-white/5 py-1 px-1 transition-all duration-200\",\n                        inputValue ? \"right-10\" : \"right-3\"\n                    )}\n                >\n                    <Mic className=\"w-4 h-4 text-black/70 dark:text-white/70\" />\n                </div>\n                <button\n                    type=\"button\"\n                    className={cn(\n                        \"absolute top-1/2 -translate-y-1/2 rounded-xl bg-black/5 dark:bg-white/5 py-1 px-1 transition-all duration-700\",\n                        inputValue\n                            ? \"block right-3 animate-slide-in cursor-pointer\"\n                            : \"hidden\"\n                    )}\n                >\n                    <CornerRightUp className=\"w-4 h-4 text-black/70 dark:text-white/70 transition-opacity duration-700\" />\n                </button>\n            </div>\n        </div>\n    );\n}\n",
-      "path": "ui/ai-input-01.tsx",
-      "target": "components/ui/ai-input-01.tsx"
+      "path": "components/ai-input-01.tsx",
+      "target": "components/components/ai-input-01.tsx"
     }
   ]
 }

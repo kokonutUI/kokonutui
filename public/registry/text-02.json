@@ -1,0 +1,17 @@
+{
+  "name": "text-02",
+  "type": "registry:component",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "text"
+  ],
+  "files": [
+    {
+      "content": "\"use client\";\n\nimport { cn } from \"@/lib/utils\";\nimport { motion } from \"framer-motion\";\n\ninterface TextSplitProps {\n    text: string;\n    className?: string;\n    splitSpacing?: number;\n}\n\nconst Text_02: React.FC<TextSplitProps> = ({\n    text = \"Payout fees\",\n    className = \"\",\n    splitSpacing = 2,\n}) => {\n    return (\n        <motion.div\n            className={cn(\n                \"w-full text-center relative inline-block\",\n                className\n            )}\n            whileHover=\"hover\"\n            initial=\"default\"\n        >\n            {/* Top half */}\n            <motion.div\n                className=\"absolute w-full text-4xl -ml-0.5\"\n                variants={{\n                    default: {\n                        clipPath: \"inset(0 0 50% 0)\",\n                        y: -splitSpacing / 2,\n                        opacity: 1,\n                    },\n                    hover: {\n                        clipPath: \"inset(0 0 0 0)\",\n                        y: 0,\n                        opacity: 0,\n                    },\n                }}\n                transition={{ duration: 0.1 }}\n            >\n                {text}\n            </motion.div>\n\n            {/* Bottom half */}\n            <motion.div\n                className=\"absolute w-full text-4xl\"\n                variants={{\n                    default: {\n                        clipPath: \"inset(50% 0 0 0)\",\n                        y: splitSpacing / 2,\n                        opacity: 1,\n                    },\n                    hover: {\n                        clipPath: \"inset(0 0 0 0)\",\n                        y: 0,\n                        opacity: 1,\n                    },\n                }}\n                transition={{ duration: 0.1 }}\n            >\n                {text}\n            </motion.div>\n\n            {/* Hidden text for maintaining layout size */}\n            <div className=\"invisible text-4xl\">{text}</div>\n        </motion.div>\n    );\n};\n\nexport default Text_02;\n",
+      "path": "components/text-02.tsx",
+      "target": "components/components/text-02.tsx"
+    }
+  ]
+}

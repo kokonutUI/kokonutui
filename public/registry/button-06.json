@@ -1,0 +1,17 @@
+{
+  "name": "button-06",
+  "type": "registry:component",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "content": "\"use client\";\n\nimport { Button } from \"@/components/ui/button\";\nimport { cn } from \"@/lib/utils\";\nimport { motion, useAnimation } from \"framer-motion\";\nimport { Check, Copy } from \"lucide-react\";\nimport { useState } from \"react\";\n\ninterface Btn06Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n    textToCopy: string;\n    successDuration?: number;\n}\n\nexport function Btn06({\n    className,\n    textToCopy,\n    successDuration = 1000,\n    ...props\n}: Btn06Props) {\n    const [isCopied, setIsCopied] = useState(false);\n    const controls = useAnimation();\n\n    async function handleCopy() {\n        if (isCopied) return;\n\n        try {\n            await navigator.clipboard.writeText(textToCopy);\n            setIsCopied(true);\n\n            await controls.start({\n                scale: [1, 1.1, 1],\n                transition: { duration: 0.2 },\n            });\n\n            setTimeout(() => {\n                setIsCopied(false);\n                controls.start({ scale: 1 });\n            }, successDuration);\n        } catch (error) {\n            console.error(\"Failed to copy:\", error);\n        }\n    }\n\n    return (\n        <Button\n            className={cn(\n                \"min-w-40 relative group\",\n                \"bg-emerald-50 dark:bg-emerald-950\",\n                \"hover:bg-emerald-100 dark:hover:bg-emerald-900\",\n                \"text-emerald-600 dark:text-emerald-300\",\n                \"border border-emerald-200 dark:border-emerald-800\",\n                isCopied && \"bg-emerald-100 dark:bg-emerald-900\",\n                className\n            )}\n            onClick={handleCopy}\n            {...props}\n        >\n            <motion.div\n                animate={controls}\n                className=\"w-full flex items-center justify-center gap-2\"\n            >\n                {isCopied ? (\n                    <>\n                        <Check className=\"w-4 h-4 text-emerald-500\" />\n                        <span>Copied!</span>\n                    </>\n                ) : (\n                    <>\n                        <Copy\n                            className={cn(\n                                \"w-4 h-4 transition-transform duration-200\",\n                                \"group-hover:scale-110\"\n                            )}\n                        />\n                        <span>Copy code</span>\n                    </>\n                )}\n            </motion.div>\n\n            {/* Success indicator ring */}\n            {isCopied && (\n                <motion.div\n                    initial={{ scale: 0.8, opacity: 0 }}\n                    animate={{ scale: 1, opacity: 1 }}\n                    exit={{ scale: 1.2, opacity: 0 }}\n                    className={cn(\n                        \"absolute inset-0 rounded-md\",\n                        \"pointer-events-none\"\n                    )}\n                />\n            )}\n        </Button>\n    );\n}\n",
+      "path": "components/btn-06.tsx",
+      "target": "components/components/btn-06.tsx"
+    }
+  ]
+}

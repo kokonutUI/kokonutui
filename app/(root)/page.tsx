@@ -1,29 +1,29 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Btn03 } from "@/components/btns/btn-03";
+import { Btn03 } from "@/components/buttons/btn-03";
 import Text_01 from "@/components/texts/text-01";
-import AIInput_04 from "@/components/custom/ai-input-04";
+import AIInput_04 from "@/components/inputs/ai-input-04";
 
 export default function Home() {
     const categories = [
         {
             id: 1,
             title: "Text Components",
-            href: "/texts",
+            href: "/components/texts",
             component: <Text_01 />,
             count: 6,
         },
         {
             id: 2,
             title: "Button Components",
-            href: "/btns",
+            href: "/components/btns",
             component: <Btn03 attractRadius={30} />,
             count: 8,
         },
         {
             id: 3,
             title: "AI Input Components",
-            href: "/aiinput",
+            href: "/components/aiinput",
             component: <AIInput_04 />,
             count: 20,
         },
@@ -69,7 +69,7 @@ export default function Home() {
                         </div>
                         <div className="flex justify-center">
                             <Link
-                                href="/aiinput"
+                                href="/components/btns"
                                 className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg 
                                     bg-zinc-900 dark:bg-zinc-100 
                                     text-white dark:text-zinc-900 
@@ -101,8 +101,10 @@ export default function Home() {
                                     href={category.href}
                                     className="group relative p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-all duration-200"
                                 >
-                                    <div className="aspect-video flex items-center justify-center mb-4 rounded-lg ">
-                                        {category.component}
+                                    <div className="aspect-video flex items-center justify-center mb-4 rounded-lg">
+                                        <div className="pointer-events-auto w-full h-full flex items-center justify-center">
+                                            {category.component}
+                                        </div>
                                     </div>
                                     <div className="flex items-center justify-between">
                                         <div>

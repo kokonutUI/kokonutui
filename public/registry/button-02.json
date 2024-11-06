@@ -1,0 +1,17 @@
+{
+  "name": "button-02",
+  "type": "registry:component",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "content": "\"use client\";\n\nimport { Button } from \"@/components/ui/button\";\nimport { cn } from \"@/lib/utils\";\nimport { motion, useAnimation } from \"framer-motion\";\nimport { Zap } from \"lucide-react\";\nimport { useState } from \"react\";\n\ninterface Btn02Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n    onPowerUp?: () => void;\n    chargeDuration?: number;\n}\n\nexport function Btn02({\n    className,\n    onPowerUp,\n    chargeDuration = 2000,\n    ...props\n}: Btn02Props) {\n    const [isCharging, setIsCharging] = useState(false);\n    const particleControls = useAnimation();\n    const chargeControls = useAnimation();\n\n    async function handleMouseDown() {\n        setIsCharging(true);\n        chargeControls.set({ height: \"100%\", y: \"100%\" });\n        await chargeControls.start({\n            y: \"0%\",\n            transition: {\n                duration: chargeDuration / 1000,\n                ease: \"easeOut\",\n            },\n        });\n        \n        // Burst animation\n        await particleControls.start({\n            scale: [1, 1.5],\n            opacity: [1, 0],\n            transition: { duration: 0.3 }\n        });\n        \n        onPowerUp?.();\n    }\n\n    function handleMouseUp() {\n        setIsCharging(false);\n        chargeControls.stop();\n        chargeControls.start({\n            y: \"100%\",\n            transition: { duration: 0.2 },\n        });\n    }\n\n    return (\n        <Button\n            className={cn(\n                \"min-w-40 relative overflow-hidden\",\n                \"bg-indigo-100 dark:bg-indigo-900\",\n                \"hover:bg-indigo-200 dark:hover:bg-indigo-800\",\n                \"text-indigo-600 dark:text-indigo-300\",\n                \"border border-indigo-300 dark:border-indigo-700\",\n                \"transition-colors duration-300\",\n                className\n            )}\n            onMouseDown={handleMouseDown}\n            onMouseUp={handleMouseUp}\n            onMouseLeave={handleMouseUp}\n            {...props}\n        >\n            <motion.div\n                initial={{ height: \"100%\", y: \"100%\" }}\n                animate={chargeControls}\n                className={cn(\n                    \"absolute left-0 bottom-0 w-full\",\n                    \"bg-gradient-to-t from-indigo-400 to-indigo-300\",\n                    \"dark:from-indigo-500 dark:to-indigo-400\",\n                    \"opacity-50\"\n                )}\n            />\n            <motion.div\n                initial={{ scale: 0, opacity: 0 }}\n                animate={particleControls}\n                className={cn(\n                    \"absolute inset-0\",\n                    \"bg-indigo-200 dark:bg-indigo-400\",\n                    \"rounded-full\"\n                )}\n            />\n            <span className=\"relative z-10 w-full flex items-center justify-center gap-2\">\n                <Zap className={cn(\n                    \"w-4 h-4 transition-transform\",\n                    isCharging && \"animate-bounce\"\n                )} />\n                {!isCharging ? \"Power Up!\" : \"Charging...\"}\n            </span>\n        </Button>\n    );\n}\n",
+      "path": "components/btn-02.tsx",
+      "target": "components/components/btn-02.tsx"
+    }
+  ]
+}

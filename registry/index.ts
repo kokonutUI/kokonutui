@@ -1,3 +1,3 @@
-import { ui } from "./registry-components";
+import { components } from "./registry-components";
 
-export const registryComponents = [...ui];
+export const registryComponents = [...components];
