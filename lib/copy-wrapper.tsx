@@ -1,27 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { CopyOverlay } from "./copy-overlay";
 import { AnimatePresence } from "framer-motion";
 import { CopyButton } from "./copy-button";
 import { Terminal } from "lucide-react";
+import { getComponent } from "./action";
 
 interface CopyWrapperProps {
-    text: string;
-    fileName?: string;
+    fileName: string;
+    folder: string;
 }
 
 const prePath = process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : `https://${process.env.NEXT_PUBLIC_SITE_URL}`;
 
-export function CopyWrapper({ text, fileName }: CopyWrapperProps) {
+export function CopyWrapper({ fileName, folder }: CopyWrapperProps) {
     const [showOverlay, setShowOverlay] = useState(false);
+    const [isLoading, startTransition] = useTransition();
 
     const handleCopy = () => {
-        setShowOverlay(true);
-        navigator.clipboard.writeText(text);
-        setTimeout(() => setShowOverlay(false), 1000);
+        startTransition(async () => {
+            /**
+             * Call server action
+             */
+            const component = await getComponent(fileName, folder);
+            /**
+             * Simulate for animation.
+             */
+            setShowOverlay(true);
+            navigator.clipboard.writeText(component);
+            setTimeout(() => setShowOverlay(false), 1000);
+        });
     };
 
     const handleCLI = () => {

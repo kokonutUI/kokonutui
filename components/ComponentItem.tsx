@@ -15,24 +15,6 @@ interface ComponentItemProps {
 }
 
 export function ComponentItem({ item, folder }: ComponentItemProps) {
-    const [isLoading, startTransition] = useTransition();
-    const [rawText, setRawText] = useState("");
-    useEffect(() => {
-        try {
-            startTransition(async () => {
-                /**
-                 * Call server action
-                 */
-                const component = await getComponent(item.fileName, folder);
-                setRawText(component);
-                /**
-                 * Simulate for animation.
-                 */
-            });
-        } catch (err) {
-            console.error("Failed to copy:", err);
-        }
-    }, [item, folder]);
 
     return (
         <div
@@ -48,14 +30,17 @@ export function ComponentItem({ item, folder }: ComponentItemProps) {
                             Component {item.id}
                         </h3>
                         <div className="block sm:hidden">
-                            <CopyWrapper text={rawText} fileName={item.fileName} />
+                            <CopyWrapper
+                                fileName={item.fileName}
+                                folder={folder}
+                            />
                         </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
                         <div className="hidden sm:block">
                             <CopyWrapper
-                                text={rawText}
                                 fileName={item.fileName}
+                                folder={folder}
                             />
                         </div>
                         {item.dependencies && (
@@ -85,7 +70,9 @@ export function ComponentItem({ item, folder }: ComponentItemProps) {
                     dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 opacity-50"
                 />
             </div>
-            <div className="relative my-12 flex items-center justify-center">{item.component}</div>
+            <div className="relative my-12 flex items-center justify-center">
+                {item.component}
+            </div>
         </div>
     );
 }
