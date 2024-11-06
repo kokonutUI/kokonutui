@@ -46,7 +46,7 @@ export function ComponentItem({ item, folder }: ComponentItemProps) {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <div className="flex items-center justify-between sm:justify-start gap-2">
                         <h3 className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                            Component {item.id + 1}
+                            Component {item.id}
                         </h3>
                         <div className="block sm:hidden">
                             <CopyWrapper text={rawText} />
@@ -83,7 +83,7 @@ export function ComponentItem({ item, folder }: ComponentItemProps) {
                     dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 opacity-50"
                 />
             </div>
-            <div className="relative my-12">{item.component}</div>
+            <div className="relative my-12 flex items-center justify-center">{item.component}</div>
         </div>
     );
 }

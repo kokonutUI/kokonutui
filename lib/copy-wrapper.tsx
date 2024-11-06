@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { CopyOverlay } from "./copy-overlay";
 import { AnimatePresence } from "framer-motion";
