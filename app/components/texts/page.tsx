@@ -6,7 +6,6 @@ import Text_03 from "@/components/texts/text-03";
 import { Text_04 } from "@/components/texts/text-04";
 import { Text_05 } from "@/components/texts/text-05";
 import { Text_06 } from "@/components/texts/text-06";
-import Text_07 from "@/components/texts/text-07";
 import { ViewComponents } from "@/components/ViewComponents";
 
 export default function Texts() {
