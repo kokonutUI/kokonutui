@@ -30,7 +30,7 @@ export default function Text_07({
     useEffect(() => {
         let timeoutId: NodeJS.Timeout;
         let repeatTimeoutId: NodeJS.Timeout;
-        let intervals: NodeJS.Timer[] = [];
+        let intervals: NodeJS.Timeout[] = [];
 
         function startAnimation() {
             const frames = new Array(text.length).fill(0);
@@ -75,7 +75,9 @@ export default function Text_07({
                 intervals = startAnimation();
 
                 timeoutId = setTimeout(() => {
-                    intervals.forEach((interval) => clearInterval(interval));
+                    for (const interval of intervals) {
+                        clearInterval(interval);
+                    }
                     setDisplayedText(text);
 
                     repeatTimeoutId = setTimeout(() => {
@@ -88,13 +90,17 @@ export default function Text_07({
         } else {
             intervals = startAnimation();
             timeoutId = setTimeout(() => {
-                intervals.forEach((interval) => clearInterval(interval));
+                for (const interval of intervals) {
+                    clearInterval(interval);
+                }
                 setDisplayedText(text);
             }, duration);
         }
 
         return () => {
-            intervals.forEach((interval) => clearInterval(interval));
+            for (const interval of intervals) {
+                clearInterval(interval);
+            }
             clearTimeout(timeoutId);
             if (repeat) clearTimeout(repeatTimeoutId);
         };

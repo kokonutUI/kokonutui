@@ -7,11 +7,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
 
     useEffect(() => {
         const handleScroll = () => {
@@ -42,58 +40,30 @@ export function Header() {
                 >
                     <div className="relative z-10 flex items-center justify-around w-full gap-2">
                         <div className="flex items-center gap-3">
-                            <Image
-                                src="/logo.svg"
-                                alt="logo"
-                                width={32}
-                                height={32}
-                                className="hidden dark:block"
-                            />
-                            <Image
-                                src="/logo-black.svg"
-                                alt="logo"
-                                width={32}
-                                height={32}
-                                className="block dark:hidden"
-                            />
+                            <div className="flex items-center gap-2">
+                                <Image
+                                    src="/logo.svg"
+                                    alt="logo"
+                                    width={32}
+                                    height={32}
+                                    className="hidden dark:block"
+                                />
+                                <Image
+                                    src="/logo-black.svg"
+                                    alt="logo"
+                                    width={32}
+                                    height={32}
+                                    className="block dark:hidden"
+                                />
+                                <span className="text-xs font-medium px-1.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-200">
+                                    Beta
+                                </span>
+                            </div>
                             <ThemeToggle />
                         </div>
                         <div className="h-4 w-px bg-gradient-to-b from-gray-200/80 via-gray-300/80 to-gray-200/80 dark:from-zinc-700 dark:via-zinc-600 dark:to-zinc-700" />
                         <div className="flex items-center gap-4">
                             <div className="flex items-center gap-3">
-                                <motion.button
-                                    type="button"
-                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    className={`
-                                        hidden sm:flex
-                                        items-center justify-center
-                                        rounded-full
-                                        bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-800
-                                        hover:from-zinc-900 hover:via-zinc-800 hover:to-zinc-900
-                                        dark:from-gray-50 dark:via-white dark:to-gray-50
-                                        dark:hover:from-white dark:hover:via-gray-50 dark:hover:to-white
-                                        text-white dark:text-zinc-900
-                                        w-7 h-7
-                                        transition-all duration-300
-                                        shadow-[0_2px_8px_-2px_rgba(0,0,0,0.12),inset_0_1px_0.5px_0.5px_rgba(255,255,255,0.15)]
-                                        dark:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.08),inset_0_1px_0.5px_0.5px_rgba(255,255,255,0.6)]
-                                        hover:shadow-[0_2px_12px_-2px_rgba(0,0,0,0.2),inset_0_1px_0.5px_0.5px_rgba(255,255,255,0.15)]
-                                    `}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                >
-                                    <motion.div
-                                        animate={{
-                                            rotate: isMenuOpen ? 0 : 180,
-                                        }}
-                                        transition={{
-                                            duration: 0.3,
-                                            ease: "easeInOut",
-                                        }}
-                                    >
-                                        <Layers2 className="w-4 h-4 rotate-90" />
-                                    </motion.div>
-                                </motion.button>
                                 <motion.button
                                     type="button"
                                     onClick={() =>
