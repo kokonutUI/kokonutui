@@ -2,7 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     outputFileTracingIncludes: {
-        "/**": ["components/custom/**/*"],
+        "/**": [
+            "components/ai-input/**/*",
+            "components/texts/**/*",
+            "components/buttons/**/*",
+        ],
     },
 };
 
