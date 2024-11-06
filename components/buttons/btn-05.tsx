@@ -89,7 +89,7 @@ export function Btn05({
                     )}
                 >
                     <Zap className="w-4 h-4" />
-                    {isGlitching ? "ERR0R" : "Click me"}
+                    {isGlitching ? "Panic!!!" : "Panic"}
                 </motion.span>
             ))}
             
