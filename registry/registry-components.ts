@@ -239,11 +239,4 @@ export const components: Registry = [
         registryDependencies: ["text"],
         files: ["components/text-06.tsx"],
     },
-    {
-        name: "text-07",
-        type: "registry:component",
-        dependencies: ["lucide-react"],
-        registryDependencies: ["text"],
-        files: ["components/text-07.tsx"],
-    },
 ];

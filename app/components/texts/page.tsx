@@ -50,13 +50,13 @@ export default function Texts() {
 
             fileName: "text-06.tsx",
         },
-        {
-            id: 7,
-            title: "Reveal",
-            component: <Text_07 text="안녀하세요" repeat={true} />,
+        // {
+        //     id: 7,
+        //     title: "Reveal",
+        //     component: <Text_07 text="안녀하세요" repeat={true} />,
 
-            fileName: "text-07.tsx",
-        },
+        //     fileName: "text-07.tsx",
+        // },
     ];
 
     return (

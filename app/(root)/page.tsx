@@ -97,9 +97,8 @@ export default function Home() {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
                             {categories.map((category) => (
-                                <Link
+                                <div
                                     key={category.id}
-                                    href={category.href}
                                     className="group relative p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-all duration-200"
                                 >
                                     <div className="aspect-video flex items-center justify-center mb-4 rounded-lg">
@@ -118,7 +117,7 @@ export default function Home() {
                                         </div>
                                         <ArrowRight className="w-5 h-5 text-zinc-400 dark:text-zinc-600 transition-transform group-hover:translate-x-1" />
                                     </div>
-                                </Link>
+                                </div>
                             ))}
                         </div>
                     </div>
