@@ -28,37 +28,27 @@ export default function Text_07({
     const [displayedText, setDisplayedText] = useState(text);
 
     useEffect(() => {
-        let timeoutId: NodeJS.Timeout;
-        let repeatTimeoutId: NodeJS.Timeout;
-        let intervals: NodeJS.Timeout[] = [];
+        let timeoutId: number;
+        let repeatTimeoutId: number;
+        let intervals: number[] = [];
 
         function startAnimation() {
             const frames = new Array(text.length).fill(0);
             setDisplayedText(
                 text
                     .split("")
-                    .map(
-                        () =>
-                            characters[
-                                Math.floor(Math.random() * characters.length)
-                            ]
-                    )
+                    .map(() => characters[Math.floor(Math.random() * characters.length)])
                     .join("")
             );
 
-            const intervals = text.split("").map((targetChar, index) => {
-                return setInterval(() => {
+            const newIntervals = text.split("").map((targetChar, index) => {
+                return window.setInterval(() => {
                     frames[index]++;
 
                     setDisplayedText((prev) => {
                         const chars = prev.split("");
                         if (frames[index] < iterationsPerChar) {
-                            chars[index] =
-                                characters[
-                                    Math.floor(
-                                        Math.random() * characters.length
-                                    )
-                                ];
+                            chars[index] = characters[Math.floor(Math.random() * characters.length)];
                         } else {
                             chars[index] = targetChar;
                         }
@@ -67,20 +57,18 @@ export default function Text_07({
                 }, interval);
             });
 
-            return intervals;
+            return newIntervals;
         }
 
         if (repeat) {
             const runAnimation = () => {
                 intervals = startAnimation();
 
-                timeoutId = setTimeout(() => {
-                    for (const interval of intervals) {
-                        clearInterval(interval);
-                    }
+                timeoutId = window.setTimeout(() => {
+                    intervals.forEach(window.clearInterval);
                     setDisplayedText(text);
 
-                    repeatTimeoutId = setTimeout(() => {
+                    repeatTimeoutId = window.setTimeout(() => {
                         runAnimation();
                     }, repeatDelay);
                 }, duration);
@@ -89,20 +77,16 @@ export default function Text_07({
             runAnimation();
         } else {
             intervals = startAnimation();
-            timeoutId = setTimeout(() => {
-                for (const interval of intervals) {
-                    clearInterval(interval);
-                }
+            timeoutId = window.setTimeout(() => {
+                intervals.forEach(window.clearInterval);
                 setDisplayedText(text);
             }, duration);
         }
 
         return () => {
-            for (const interval of intervals) {
-                clearInterval(interval);
-            }
-            clearTimeout(timeoutId);
-            if (repeat) clearTimeout(repeatTimeoutId);
+            intervals.forEach(window.clearInterval);
+            window.clearTimeout(timeoutId);
+            if (repeat) window.clearTimeout(repeatTimeoutId);
         };
     }, [text, duration, interval, iterationsPerChar, repeat, repeatDelay]);
 
