@@ -1,6 +1,6 @@
 import type { Registry } from "./schema";
 
-export const component: Registry = [
+export const ui: Registry = [
     {
         name: "ai-input-01",
         type: "registry:component",
