@@ -18,6 +18,25 @@ Access a collection of free-to-use, standalone components with KokonutUI. Each c
 
 KokonutUI components are meant to be use with Next.js projects that use TailwindCSS and shadcn. However they are also compatible with any React Project.
 
+### Using Shadcn CLI.
+
+All components can be installed using [shadcn CLI](https://ui.shadcn.com/docs/cli), which make it really easy.
+
+```bash
+# npx, bunx...
+bunx shadcn@latest add https://kokonut.dev/registry/ai-input-01.json
+```
+
+```jsx
+import AIInput_01 from "@/components/ui/ai-input-01";
+
+export function AIInput01Demo() {
+    return <AIInput_01 />;
+}
+```
+
+### Manual installation
+
 -   **Copy and Paste**: Select and copy the component code you want to use.
 
 -   **Check Requirements**: Some components need additional libraries (e.g., Framer Motion, Lucide React). Required libraries are listed at the top-right corner of each component.

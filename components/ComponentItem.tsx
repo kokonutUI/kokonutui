@@ -1,6 +1,6 @@
 import { getComponent } from "@/lib/action";
 import { CopyWrapper } from "@/lib/copy-wrapper";
-import { Package } from "lucide-react";
+import { Package, Terminal } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
 
 interface ComponentItemProps {
@@ -28,7 +28,6 @@ export function ComponentItem({ item, folder }: ComponentItemProps) {
                 /**
                  * Simulate for animation.
                  */
-                await new Promise((resolve) => setTimeout(resolve, 1000));
             });
         } catch (err) {
             console.error("Failed to copy:", err);
@@ -49,12 +48,15 @@ export function ComponentItem({ item, folder }: ComponentItemProps) {
                             Component {item.id}
                         </h3>
                         <div className="block sm:hidden">
-                            <CopyWrapper text={rawText} />
+                            <CopyWrapper text={rawText} fileName={item.fileName} />
                         </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
                         <div className="hidden sm:block">
-                            <CopyWrapper text={rawText} />
+                            <CopyWrapper
+                                text={rawText}
+                                fileName={item.fileName}
+                            />
                         </div>
                         {item.dependencies && (
                             <div className="flex flex-wrap gap-1">

@@ -14,10 +14,7 @@ export function CopyButton({ onClick }: CopyButtonProps) {
                 text-zinc-600 dark:text-zinc-400 transition-colors
                 touch-manipulation"
         >
-            <>
-                <Copy className="w-4 h-4" />
-                Copy
-            </>
+            <Copy className="w-4 h-4" />
         </button>
     );
 }

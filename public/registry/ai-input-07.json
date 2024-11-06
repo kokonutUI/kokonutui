@@ -1,0 +1,18 @@
+{
+  "name": "ai-input-07",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "textarea"
+  ],
+  "files": [
+    {
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { CornerRightUp } from \"lucide-react\";\nimport { useState, useRef, useEffect } from \"react\";\nimport { Textarea } from \"@/components/ui/textarea\";\nimport { cn } from \"@/lib/utils\";\n\nexport default function AIInput_07() {\n    const [inputValue, setInputValue] = useState(\"\");\n    const [submitted, setSubmitted] = useState(true);\n    const [isAnimating, setIsAnimating] = useState(true);\n    const textareaRef = useRef<HTMLTextAreaElement | null>(null);\n\n    useEffect(() => {\n        if (textareaRef.current) {\n            textareaRef.current.style.height = \"auto\";\n            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;\n        }\n    }, []);\n\n    useEffect(() => {\n        let timeoutId: NodeJS.Timeout;\n\n        const runAnimation = () => {\n            if (!isAnimating) return;\n            setSubmitted(true);\n            timeoutId = setTimeout(() => {\n                setSubmitted(false);\n                timeoutId = setTimeout(runAnimation, 1000);\n            }, 3000);\n        };\n\n        if (isAnimating) {\n            runAnimation();\n        }\n\n        return () => clearTimeout(timeoutId);\n    }, [isAnimating]);\n\n    return (\n        <div className=\"w-full py-4\">\n            <div className=\"relative max-w-xl w-full mx-auto flex items-start flex-col gap-2\">\n                <div className=\"relative max-w-xl w-full mx-auto\">\n                    <Textarea\n                        id=\"input-01\"\n                        placeholder=\"Ask me anything!\"\n                        className=\"max-w-xl bg-black/5 dark:bg-white/5 w-full rounded-3xl pl-6 pr-10 py-4 placeholder:text-black/70 dark:placeholder:text-white/70 border-none ring-black/30 dark:ring-white/30 text-black dark:text-white resize-none text-wrap min-h-[40px]\"\n                        rows={1}\n                        ref={textareaRef}\n                        value={inputValue}\n                        onChange={(e) => setInputValue(e.target.value)}\n                        disabled={submitted}\n                    />\n                    <button\n                        className={cn(\n                            \"absolute right-3 top-1/2 -translate-y-1/2 rounded-xl py-1 px-1\",\n                            submitted ? \"bg-none\" : \"bg-black/5 dark:bg-white/5\"\n                        )}\n                        type=\"button\"\n                    >\n                        {submitted ? (\n                            <div\n                                className=\"w-4 h-4 bg-black dark:bg-white rounded-sm animate-spin transition duration-700\"\n                                style={{ animationDuration: \"3s\" }}\n                            />\n                        ) : (\n                            <CornerRightUp\n                                className={cn(\n                                    \"w-4 h-4 transition-opacity dark:text-white\",\n                                    inputValue ? \"opacity-100\" : \"opacity-30\"\n                                )}\n                            />\n                        )}\n                    </button>\n                </div>\n                <p className=\"pl-4 h-4 text-xs mx-auto text-black/70 dark:text-white/70\">\n                    {submitted ? \"AI is thinking...\" : \"Ready to submit!\"}\n                </p>\n            </div>\n        </div>\n    );\n}\n",
+      "path": "ui/ai-input-07.tsx",
+      "target": "components/ui/ai-input-07.tsx"
+    }
+  ]
+}

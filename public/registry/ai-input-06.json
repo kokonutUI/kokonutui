@@ -1,0 +1,18 @@
+{
+  "name": "ai-input-06",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "textarea"
+  ],
+  "files": [
+    {
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { CornerRightUp } from \"lucide-react\";\nimport { useState, useRef } from \"react\";\nimport { Textarea } from \"@/components/ui/textarea\";\nimport { cn } from \"@/lib/utils\";\n\nexport default function AIInput_06() {\n    const [inputValue, setInputValue] = useState(\"\");\n    const textareaRef = useRef<HTMLTextAreaElement | null>(null);\n\n    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {\n        if (e.key === \"Enter\" && !e.shiftKey) {\n            e.preventDefault();\n            setInputValue(\"\");\n        }\n    };\n\n    return (\n        <div className=\"w-full py-4\">\n            <div className=\"relative max-w-xl w-full mx-auto flex items-start flex-col gap-2\">\n                <div className=\"relative max-w-xl w-full mx-auto\">\n                    <Textarea\n                        id=\"input-01\"\n                        placeholder=\"Ask me anything!\"\n                        className=\"max-w-xl bg-black/5 dark:bg-white/5 w-full rounded-3xl pl-6 pr-12 py-4 placeholder:text-black/70 dark:placeholder:text-white/70 border-none ring-black/30 dark:ring-white/30 text-black dark:text-white resize-none text-wrap min-h-[40px]\"\n                        rows={1}\n                        value={inputValue}\n                        onKeyDown={handleKeyDown}\n                        onChange={(e) => {\n                            setInputValue(e.target.value);\n                            if (textareaRef.current) {\n                                textareaRef.current.style.height = \"auto\";\n                                textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;\n                            }\n                        }}\n                    />\n                    <button\n                        className=\"absolute right-3 top-1/2 -translate-y-1/2 rounded-xl bg-black/5 dark:bg-white/5 py-1 px-1\"\n                        type=\"button\"\n                    >\n                        <CornerRightUp\n                            className={cn(\n                                \"w-4 h-4 transition-opacity dark:text-white\",\n                                inputValue ? \"opacity-100\" : \"opacity-30\"\n                            )}\n                        />\n                    </button>\n                </div>\n                <p className=\"ml-4 text-xs text-black/40 dark:text-white/40\">\n                    {inputValue.length + 20}/100 characters\n                </p>\n            </div>\n        </div>\n    );\n}\n",
+      "path": "ui/ai-input-06.tsx",
+      "target": "components/ui/ai-input-06.tsx"
+    }
+  ]
+}
