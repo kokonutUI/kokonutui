@@ -16,14 +16,14 @@ export default function Home() {
         {
             id: 2,
             title: "Button Components",
-            href: "/components/btns",
+            href: "/components/buttons",
             component: <Btn03 attractRadius={30} />,
             count: 8,
         },
         {
             id: 3,
             title: "AI Input Components",
-            href: "/components/aiinput",
+            href: "/components/ai-input",
             component: <AIInput_04 />,
             count: 20,
         },
@@ -69,7 +69,7 @@ export default function Home() {
                         </div>
                         <div className="flex justify-center">
                             <Link
-                                href="/components/btns"
+                                href="/components/buttons"
                                 className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg 
                                     bg-zinc-900 dark:bg-zinc-100 
                                     text-white dark:text-zinc-900 

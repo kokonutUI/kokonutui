@@ -76,7 +76,7 @@ export default function Buttons_View() {
         <div className="grid grid-rows-[auto_1fr_20px] min-h-screen p-1 lg:p-4 pb-20 gap-12 sm:p-16">
             <ViewComponents
                 components={components}
-                folder="btns"
+                folder="buttons"
                 containerClassName="grid-cols-1 lg:grid-cols-3 gap-2"
             />
 
