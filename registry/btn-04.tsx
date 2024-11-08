@@ -3,109 +3,100 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, useAnimation } from "framer-motion";
-import { Droplets } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Zap } from "lucide-react";
+import { useState } from "react";
 
 interface Btn04Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    blobSize?: number;
-    blobColor?: string;
+    onPowerUp?: () => void;
+    chargeDuration?: number;
 }
 
 export default function Btn04({
     className,
-    blobSize = 80,
-    blobColor = "rgba(147, 51, 234, 0.3)", // Purple
+    onPowerUp,
+    chargeDuration = 2000,
     ...props
 }: Btn04Props) {
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const [isHovering, setIsHovering] = useState(false);
-    const blobControls = useAnimation();
-    const [coords, setCoords] = useState({ x: 0, y: 0 });
+    const [isCharging, setIsCharging] = useState(false);
+    const particleControls = useAnimation();
+    const chargeControls = useAnimation();
 
-    function handleMouseMove(e: React.MouseEvent<HTMLButtonElement>) {
-        if (!buttonRef.current) return;
-        
-        const rect = buttonRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        setCoords({ x, y });
-        blobControls.start({
-            x: x - blobSize / 2,
-            y: y - blobSize / 2,
+    async function handleStart() {
+        setIsCharging(true);
+        chargeControls.set({ height: "100%", y: "100%" });
+        await chargeControls.start({
+            y: "0%",
             transition: {
-                type: "spring",
-                damping: 15,
-                stiffness: 200,
+                duration: chargeDuration / 1000,
+                ease: "easeOut",
             },
         });
+
+        await particleControls.start({
+            scale: [1, 1.5],
+            opacity: [1, 0],
+            transition: { duration: 0.3 },
+        });
+
+        onPowerUp?.();
     }
 
-    function handleMouseEnter() {
-        setIsHovering(true);
-        blobControls.start({
-            scale: 1,
-            opacity: 1,
+    function handleEnd() {
+        setIsCharging(false);
+        chargeControls.stop();
+        chargeControls.start({
+            y: "100%",
             transition: { duration: 0.2 },
         });
     }
-
-    function handleMouseLeave() {
-        setIsHovering(false);
-        blobControls.start({
-            scale: 0,
-            opacity: 0,
-            transition: { duration: 0.2 },
-        });
-    }
-
-    useEffect(() => {
-        if (buttonRef.current) {
-            const rect = buttonRef.current.getBoundingClientRect();
-            setCoords({
-                x: rect.width / 2,
-                y: rect.height / 2,
-            });
-        }
-    }, []);
 
     return (
         <Button
-            ref={buttonRef}
             className={cn(
-                "min-w-40 relative overflow-hidden",
-                "bg-purple-50 dark:bg-purple-950",
-                "hover:bg-purple-100 dark:hover:bg-purple-900",
-                "text-purple-600 dark:text-purple-300",
-                "border border-purple-200 dark:border-purple-800",
+                "min-w-[120px] sm:min-w-40 relative overflow-hidden",
+                "bg-indigo-100 dark:bg-indigo-900",
+                "hover:bg-indigo-200 dark:hover:bg-indigo-800",
+                "text-indigo-900 dark:text-indigo-300",
+                "border border-indigo-300 dark:border-indigo-700",
                 "transition-colors duration-300",
+                "touch-none",
                 className
             )}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onMouseDown={handleStart}
+            onMouseUp={handleEnd}
+            onMouseLeave={handleEnd}
+            onTouchStart={handleStart}
+            onTouchEnd={handleEnd}
+            onTouchCancel={handleEnd}
             {...props}
         >
             <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={blobControls}
-                style={{
-                    width: blobSize,
-                    height: blobSize,
-                    backgroundColor: blobColor,
-                }}
+                initial={{ height: "100%", y: "100%" }}
+                animate={chargeControls}
                 className={cn(
-                    "absolute rounded-full",
-                    "blur-xl",
-                    "pointer-events-none"
+                    "absolute left-0 bottom-0 w-full",
+                    "bg-gradient-to-t from-indigo-400 to-indigo-300",
+                    "dark:from-indigo-500 dark:to-indigo-400",
+                    "opacity-50"
+                )}
+            />
+            <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={particleControls}
+                className={cn(
+                    "absolute inset-0",
+                    "bg-indigo-200 dark:bg-indigo-400",
+                    "rounded-full"
                 )}
             />
             <span className="relative z-10 w-full flex items-center justify-center gap-2">
-                <Droplets className={cn(
-                    "w-4 h-4 transition-transform duration-300",
-                    isHovering && "scale-110"
-                )} />
-                {isHovering ? "Splish splash" : "Hover me"}
+                <Zap
+                    className={cn(
+                        "w-4 h-4 transition-transform",
+                        isCharging && "animate-bounce"
+                    )}
+                />
+                {!isCharging ? "Power Up!" : "Charging..."}
             </span>
         </Button>
     );

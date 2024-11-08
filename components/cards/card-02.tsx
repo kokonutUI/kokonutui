@@ -1,200 +1,187 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Clock, Code2, MessageSquare } from "lucide-react";
+import { Calendar, Mail, MessageSquare, Phone, Clock } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-interface TeamMember {
+interface Skill {
     name: string;
-    image: string;
+    level: number;
 }
 
 interface Card02Props {
-    title?: string;
-    subtitle?: string;
-    teamMembers?: TeamMember[];
-    activeDiscussions?: number;
-    codeUpdates?: number;
-    dueDate?: string;
-    progress?: number;
-    href?: string;
+    name?: string;
+    role?: string;
+    image?: string;
+    availability?: string;
+    rating?: number;
+    completedProjects?: number;
+    skills?: Skill[];
+    email?: string;
+    phone?: string;
+    timeZone?: string;
+    onContact?: (type: "email" | "phone" | "message") => void;
 }
 
 export default function Card_02({
-    title = "Mobile App Redesign",
-    subtitle = "Design System & Component Library",
-    teamMembers = [
-        { name: "Alex", image: "https://i.pravatar.cc/150?img=1" },
-        { name: "Sarah", image: "https://i.pravatar.cc/150?img=2" },
-        { name: "Mike", image: "https://i.pravatar.cc/150?img=3" },
-        { name: "Lisa", image: "https://i.pravatar.cc/150?img=4" },
+    name = "Sarah Anderson",
+    role = "Senior Product Designer",
+    image = "/av01.png",
+    availability = "Available in 2 weeks",
+    rating = 4.9,
+    completedProjects = 145,
+    skills = [
+        { name: "UI Design", level: 5 },
+        { name: "UX Research", level: 4 },
+        { name: "Prototyping", level: 5 },
+        { name: "Design Systems", level: 4 },
     ],
-    activeDiscussions = 8,
-    codeUpdates = 24,
-    dueDate = "2 days left",
-    progress = 68,
-    href = "#",
+    onContact = (type: "email" | "phone" | "message") =>
+        console.log(`Contact via ${type}`),
 }: Card02Props) {
     return (
-        <Link href={href}>
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+        <div className="relative w-full max-w-xl mx-auto">
+            <div className="absolute -top-20 -right-20 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl" />
+            <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+
+            <div
+                className="relative overflow-hidden rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 
+                bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl"
             >
-                <Card
-                    className="group relative overflow-hidden
-                    bg-white dark:bg-zinc-900
-                    hover:shadow-md transition-all duration-300"
-                >
-                    <CardHeader className="p-8 pb-0">
-                        <div className="flex items-start justify-between">
-                            <div className="space-y-1.5">
-                                <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-                                    {title}
-                                </h3>
-                                <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                                    {subtitle}
-                                </p>
-                            </div>
-
-                            <div
-                                className="flex items-center gap-1.5 px-3 py-1 rounded-full
-                                bg-amber-50 dark:bg-amber-900/30
-                                text-amber-600 dark:text-amber-400
-                                text-xs font-medium"
-                            >
-                                <Clock className="w-3.5 h-3.5" />
-                                <span>{dueDate}</span>
-                            </div>
-                        </div>
-                    </CardHeader>
-
-                    <CardContent className="p-8 space-y-6">
-                        {/* Team Members */}
-                        <div className="flex items-center gap-2">
-                            <div className="flex -space-x-2">
-                                {teamMembers.map((member, index) => (
-                                    <motion.div
-                                        key={member.name}
-                                        initial={{ opacity: 0, x: -10 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: index * 0.1 }}
-                                        className="relative"
-                                    >
-                                        <Image
-                                            src={member.image}
-                                            alt={member.name}
-                                            width={32}
-                                            height={32}
-                                            className="rounded-full ring-2 ring-white dark:ring-zinc-900"
-                                        />
-                                        <span
-                                            className="absolute -bottom-4 left-1/2 -translate-x-1/2
-                                            opacity-0 group-hover:opacity-100 transition-opacity duration-200
-                                            text-[10px] text-zinc-600 dark:text-zinc-400"
-                                        >
-                                            {member.name}
-                                        </span>
-                                    </motion.div>
-                                ))}
-                            </div>
-                            <Button
-                                variant="outline"
-                                size="icon"
-                                className="w-8 h-8 rounded-full
-                                    bg-zinc-100 dark:bg-zinc-800
-                                    hover:bg-zinc-200 dark:hover:bg-zinc-700"
-                            >
-                                +
-                            </Button>
-                        </div>
-
-                        {/* Activity Stats */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <div
-                                className="flex items-center gap-2 p-3 rounded-xl
-                                bg-zinc-50 dark:bg-zinc-800/50"
-                            >
-                                <MessageSquare className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
-                                <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                                    {activeDiscussions} discussions
-                                </span>
-                            </div>
-                            <div
-                                className="flex items-center gap-2 p-3 rounded-xl
-                                bg-zinc-50 dark:bg-zinc-800/50"
-                            >
-                                <Code2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
-                                <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                                    {codeUpdates} commits
-                                </span>
-                            </div>
-                        </div>
-
-                        {/* Progress Bar */}
-                        <div className="space-y-2">
-                            <div className="flex items-center justify-between text-sm">
-                                <span className="font-medium text-zinc-700 dark:text-zinc-300">
-                                    Progress
-                                </span>
-                                <span className="text-zinc-500 dark:text-zinc-400">
-                                    {progress}%
-                                </span>
-                            </div>
-                            <div className="h-2 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
-                                <motion.div
-                                    className="h-full rounded-full bg-indigo-500 dark:bg-indigo-400"
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${progress}%` }}
-                                    transition={{ duration: 1, delay: 0.2 }}
+                <div className="relative p-8 pb-0">
+                    <div className="flex items-start gap-6">
+                        <div className="relative">
+                            <div className="w-24 h-24 rounded-2xl overflow-hidden ring-2 ring-zinc-100 dark:ring-zinc-800">
+                                <Image
+                                    src={image}
+                                    alt={name}
+                                    width={96}
+                                    height={96}
+                                    className="object-cover"
                                 />
                             </div>
-                        </div>
-                    </CardContent>
-
-                    <CardFooter className="px-8 pb-8">
-                        <div className="flex items-center justify-between w-full">
-                            <div className="text-xs text-zinc-500 dark:text-zinc-400">
-                                View project details →
-                            </div>
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="p-2 -m-2 rounded-full
-                                    text-zinc-600 dark:text-zinc-400
-                                    hover:text-zinc-900 dark:hover:text-zinc-100
-                                    transition-colors duration-200"
+                            <div
+                                className="absolute -bottom-1 -right-1 p-1.5 rounded-lg 
+                                bg-emerald-50 dark:bg-emerald-900/50 
+                                text-emerald-600 dark:text-emerald-400
+                                ring-2 ring-white dark:ring-zinc-900"
                             >
-                                <ArrowRight className="w-5 h-5" />
-                            </motion.div>
+                                <Clock className="w-3.5 h-3.5" />
+                            </div>
                         </div>
-                    </CardFooter>
 
-                    <div
-                        className="absolute inset-0 rounded-2xl duration-300
-                        opacity-0 group-hover:opacity-100 pointer-events-none"
-                    >
-                        <div
-                            className="absolute inset-0 dark:opacity-0
-                            bg-gradient-to-b from-indigo-100/50 via-white/0 to-white/0
-                            "
-                        />
-                        <div
-                            className="absolute inset-0 opacity-0 dark:opacity-100
-                            bg-gradient-to-b from-indigo-900/20 via-zinc-900/0 to-zinc-900/0
-                            "
-                        />
+                        <div className="flex-1 pt-2">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+                                        {name}
+                                    </h3>
+                                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                                        {role}
+                                    </p>
+                                </div>
+                                <div
+                                    className="flex items-center gap-1 px-2.5 py-1 rounded-full 
+                                    bg-zinc-100 dark:bg-zinc-800"
+                                >
+                                    <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                                        {rating}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="mt-4 flex items-center gap-4 text-sm">
+                                <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                                    <Calendar className="w-4 h-4" />
+                                    <span>{availability}</span>
+                                </div>
+                                <div className="flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400">
+                                    <MessageSquare className="w-4 h-4" />
+                                    <span>{completedProjects} projects</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </Card>
-            </motion.div>
-        </Link>
+                </div>
+
+                <div className="p-8">
+                    <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-4">
+                        Skills & Expertise
+                    </h4>
+                    <div className="grid grid-cols-2 gap-4">
+                        {skills.map((skill) => (
+                            <div key={skill.name} className="space-y-2">
+                                <div className="flex items-center justify-between text-sm">
+                                    <span className="text-zinc-600 dark:text-zinc-400">
+                                        {skill.name}
+                                    </span>
+                                    <span className="flex">
+                                        {[...Array(5)].map((_, i) => (
+                                            <div
+                                                key={i}
+                                                className={`w-1.5 h-1.5 rounded-full mx-0.5 
+                                                    ${
+                                                        i < skill.level
+                                                            ? "bg-blue-500 dark:bg-blue-400"
+                                                            : "bg-zinc-200 dark:bg-zinc-700"
+                                                    }`}
+                                            />
+                                        ))}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="p-8 pt-4">
+                    <div className="flex items-center gap-4">
+                        <Button
+                            onClick={() => onContact("email")}
+                            className="flex-1 flex items-center justify-center gap-2 
+                                bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700
+                                text-zinc-900 dark:text-zinc-100"
+                        >
+                            <Mail className="w-4 h-4" />
+                            Email
+                        </Button>
+                        <Button
+                            onClick={() => onContact("phone")}
+                            className="flex-1 flex items-center justify-center gap-2
+                                bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700
+                                text-zinc-900 dark:text-zinc-100"
+                        >
+                            <Phone className="w-4 h-4" />
+                            Call
+                        </Button>
+                        <Button
+                            onClick={() => onContact("message")}
+                            className="flex-1 flex items-center justify-center gap-2
+                                bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700
+                                text-zinc-900 dark:text-zinc-100"
+                        >
+                            <MessageSquare className="w-4 h-4" />
+                            Message
+                        </Button>
+                    </div>
+                </div>
+
+                <div
+                    className="absolute inset-0 rounded-2xl duration-300
+                    opacity-0 group-hover:opacity-100 pointer-events-none"
+                >
+                    <div
+                        className="absolute inset-0 dark:opacity-0
+                        bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]
+                        from-rose-100/20 via-white/0 to-white/0"
+                    />
+                    <div
+                        className="absolute inset-0 opacity-0 dark:opacity-100
+                        bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]
+                        from-rose-900/20 via-zinc-900/0 to-zinc-900/0"
+                    />
+                </div>
+            </div>
+        </div>
     );
 }

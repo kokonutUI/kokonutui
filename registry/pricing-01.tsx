@@ -38,12 +38,6 @@ export default function Pricing_01({
             ),
         },
         {
-            text: "Virtual Moon Walking Lessons with Moonwalk Michael",
-            icon: (
-                <Video className="w-5 h-5 text-emerald-500 dark:text-emerald-400 hover:rotate-12 transition-transform" />
-            ),
-        },
-        {
             text: "Anti-Alien Insurance (You never know!)",
             icon: (
                 <Shield className="w-5 h-5 text-emerald-500 dark:text-emerald-400 hover:scale-110 transition-transform" />

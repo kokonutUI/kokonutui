@@ -1,10 +1,11 @@
+import { ViewComponents } from "@/components/ViewComponents";
+import type { Metadata } from "next";
 import Card_01 from "@/components/cards/card-01";
 import Card_02 from "@/components/cards/card-02";
 import Card_03 from "@/components/cards/card-03";
 import Card_04 from "@/components/cards/card-04";
-import { ViewComponents } from "@/components/ViewComponents";
-
-import type { Metadata } from "next";
+import Card_05 from "@/components/cards/card-05";
+import Card_06 from "@/components/cards/card-06";
 
 export const metadata: Metadata = {
     title: "Card",
@@ -19,14 +20,12 @@ export default function Cards_View() {
             title: "Card 01",
             component: <Card_01 />,
             fileName: "card-01.tsx",
-            dependencies: ["Framer Motion"],
         },
         {
             id: 2,
             title: "Card 02",
             component: <Card_02 />,
             fileName: "card-02.tsx",
-            dependencies: ["Framer Motion"],
         },
         {
             id: 3,
@@ -39,6 +38,19 @@ export default function Cards_View() {
             title: "Card 04",
             component: <Card_04 />,
             fileName: "card-04.tsx",
+        },
+        {
+            id: 5,
+            title: "Card 05",
+            component: <Card_05 />,
+            fileName: "card-05.tsx",
+        },
+        {
+            id: 6,
+            title: "Card 06",
+            component: <Card_06 />,
+            fileName: "card-06.tsx",
+            dependencies: ["Framer Motion"],
         },
     ];
 

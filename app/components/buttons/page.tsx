@@ -27,10 +27,9 @@ export default function Buttons_View() {
         },
         {
             id: 2,
-            title: "Power Up",
+            title: "Basic 2",
             component: <Btn02 />,
             fileName: "btn-02.tsx",
-            dependencies: ["Framer Motion"],
         },
         {
             id: 3,
