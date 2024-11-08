@@ -250,7 +250,7 @@ export const component: Registry = [
         name: "card-01",
         type: "registry:component",
         dependencies: ["lucide-react", "framer-motion"],
-        registryDependencies: ["select", "input", "button", "card"],
+        registryDependencies: ["select", "input", "button", "card", "label"],
         files: ["card-01.tsx"],
     },
     {
