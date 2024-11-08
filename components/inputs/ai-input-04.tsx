@@ -11,10 +11,17 @@ export default function AIInput_04() {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const [showSearch, setShowSearch] = useState(true);
 
+    const handleSubmit = () => {
+        setValue("");
+        if (textareaRef.current) {
+            textareaRef.current.style.height = "auto";
+        }
+    };
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            setValue("");
+            handleSubmit();
         }
     };
 
@@ -105,7 +112,8 @@ export default function AIInput_04() {
                 </div>
                 <div className="absolute right-3 bottom-3">
                     <button
-                        type="submit"
+                        type="button"
+                        onClick={handleSubmit}
                         className={cn(
                             "rounded-lg p-2 transition-colors",
                             value
