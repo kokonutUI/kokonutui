@@ -123,7 +123,10 @@ export default function Home() {
                                             {category.component}
                                         </div>
                                     </div>
-                                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                                    <Link
+                                        href={category.href}
+                                        className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800 group/link"
+                                    >
                                         <div>
                                             <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                                                 {category.title}
@@ -132,8 +135,8 @@ export default function Home() {
                                                 {category.count} components
                                             </p>
                                         </div>
-                                        <ArrowRight className="w-5 h-5 text-zinc-400 dark:text-zinc-600 transition-transform group-hover:translate-x-1" />
-                                    </div>
+                                        <ArrowRight className="w-5 h-5 text-zinc-400 dark:text-zinc-600 transition-transform group-hover/link:translate-x-1" />
+                                    </Link>
                                 </div>
                             ))}
                         </div>
@@ -149,7 +152,10 @@ export default function Home() {
                                             {category.component}
                                         </div>
                                     </div>
-                                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                                    <Link
+                                        href={category.href}
+                                        className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800 group/link"
+                                    >
                                         <div>
                                             <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
                                                 {category.title}
@@ -158,8 +164,8 @@ export default function Home() {
                                                 {category.count} components
                                             </p>
                                         </div>
-                                        <ArrowRight className="w-5 h-5 text-zinc-400 dark:text-zinc-600 transition-transform group-hover:translate-x-1" />
-                                    </div>
+                                        <ArrowRight className="w-5 h-5 text-zinc-400 dark:text-zinc-600 transition-transform group-hover/link:translate-x-1" />
+                                    </Link>
                                 </div>
                             ))}
                         </div>
